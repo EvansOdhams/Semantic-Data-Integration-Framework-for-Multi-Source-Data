@@ -1,0 +1,140 @@
+Prefix(:=<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology>
+Annotation(rdfs:comment "Name: University Enrollment Integration Ontology
+Description:
+This ontology models the core concepts and relationships in a university enrollment domain to enable semantic integration of heterogeneous data sources. It provides common classes for students, courses, departments, and enrollments, along with properties for identities, contact details, course metadata, and enrollment information. The ontology is designed to unify data coming from a relational SQLite database (Students, Courses, Enrollments), a CSV file of student contacts, and an XML course catalog, so that all sources can be queried consistently via a shared semantic model."@en)
+
+Declaration(Class(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Course>))
+Declaration(Class(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Department>))
+Declaration(Class(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Enrollment>))
+Declaration(Class(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#enrolledInCourse>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#hasEnrollment>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#offeredByDepartment>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#country>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseCode>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseTitle>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#credits>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#dateOfBirth>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentCode>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentName>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#email>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#firstName>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#grade>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#lastName>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#major>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#phone>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#semester>))
+Declaration(DataProperty(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#year>))
+Declaration(Datatype(xsd:date))
+
+############################
+#   Object Properties
+############################
+
+# Object Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#enrolledInCourse> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#enrolledInCourse>)
+
+ObjectPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#enrolledInCourse> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Enrollment>)
+ObjectPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#enrolledInCourse> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Course>)
+
+# Object Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#hasEnrollment> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#hasEnrollment>)
+
+ObjectPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#hasEnrollment> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+ObjectPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#hasEnrollment> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Enrollment>)
+
+# Object Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#offeredByDepartment> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#offeredByDepartment>)
+
+ObjectPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#offeredByDepartment> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Course>)
+ObjectPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#offeredByDepartment> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Department>)
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#country> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#country>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#country> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#country> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseCode> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseCode>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseCode> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Course>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseCode> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseTitle> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseTitle>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseTitle> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Course>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#courseTitle> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#credits> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#credits>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#credits> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Course>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#credits> xsd:integer)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#dateOfBirth> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#dateOfBirth>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#dateOfBirth> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#dateOfBirth> xsd:date)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentCode> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentCode>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentCode> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Department>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentCode> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentName> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentName>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentName> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Department>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#departmentName> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#email> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#email>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#email> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#email> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#firstName> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#firstName>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#firstName> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#firstName> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#grade> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#grade>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#grade> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Enrollment>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#grade> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#lastName> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#lastName>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#lastName> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#lastName> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#major> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#major>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#major> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#major> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#phone> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#phone>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#phone> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Student>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#phone> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#semester> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#semester>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#semester> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Enrollment>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#semester> xsd:string)
+
+# Data Property: <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#year> (<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#year>)
+
+DataPropertyDomain(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#year> <http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#Enrollment>)
+DataPropertyRange(<http://www.semanticweb.org/evans/ontologies/2025/11/university-ontology#year> xsd:integer)
+
+
+
+
+)

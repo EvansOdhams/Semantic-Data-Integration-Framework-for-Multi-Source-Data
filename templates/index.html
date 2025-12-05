@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Data Integration Framework</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <h1>Semantic Integration Framework</h1>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel: Query Editor -->
+            <section class="query-panel">
+                <div class="panel-header">
+                    <h2>SPARQL Query Interface</h2>
+                    <div class="panel-actions">
+                        <button class="btn-icon" id="clearBtn" title="Clear Query">
+                            <span>🗑️</span>
+                        </button>
+                        <button class="btn-icon" id="examplesBtn" title="Example Queries">
+                            <span>📚</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="query-editor-container">
+                    <textarea 
+                        id="queryEditor" 
+                        class="query-editor" 
+                        placeholder="Enter your SPARQL query here..."
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+
+                <div class="query-actions">
+                    <button class="btn-primary" id="executeBtn">
+                        <span class="btn-icon-left">▶</span>
+                        Execute Query
+                    </button>
+                    <button class="btn-secondary" id="formatBtn">Format Query</button>
+                </div>
+
+                <!-- Example Queries Modal -->
+                <div class="modal" id="examplesModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Example Queries</h3>
+                            <button class="modal-close" id="closeModal">×</button>
+                        </div>
+                        <div class="modal-body" id="examplesList">
+                            <!-- Examples will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results -->
+            <section class="results-panel">
+                <div class="panel-header">
+                    <h2>Query Results</h2>
+                    <div class="result-info" id="resultInfo">
+                        <span id="resultCount">0 results</span>
+                    </div>
+                </div>
+
+                <div class="results-container" id="resultsContainer">
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <h3>No Results Yet</h3>
+                        <p>Execute a SPARQL query to see results here</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Stats -->
+        <footer class="footer">
+            <div class="stat-card">
+                <div class="stat-value" id="totalTriples">113</div>
+                <div class="stat-label">Total Triples</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="dataSources">3</div>
+                <div class="stat-label">Data Sources</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="ontologyClasses">4</div>
+                <div class="stat-label">Ontology Classes</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Executing query...</p>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="toast" id="errorToast">
+        <div class="toast-content">
+            <span class="toast-icon">⚠️</span>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

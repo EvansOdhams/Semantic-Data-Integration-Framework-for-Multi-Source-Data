@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<courseCatalog academicYear="2024/2025">
+  <department code="CSC" name="Computer Science">
+    <course>
+      <courseCode>CSC101</courseCode>
+      <title>Introduction to Programming</title>
+      <level>Undergraduate</level>
+      <credits>3</credits>
+      <language>English</language>
+    </course>
+    <course>
+      <courseCode>CSC202</courseCode>
+      <title>Data Structures</title>
+      <level>Undergraduate</level>
+      <credits>3</credits>
+      <language>English</language>
+    </course>
+  </department>
+
+  <department code="BUS" name="Business">
+    <course>
+      <courseCode>BUS110</courseCode>
+      <title>Principles of Management</title>
+      <level>Undergraduate</level>
+      <credits>3</credits>
+      <language>English</language>
+    </course>
+    <course>
+      <courseCode>BUS220</courseCode>
+      <title>Organizational Behavior</title>
+      <level>Undergraduate</level>
+      <credits>3</credits>
+      <language>English</language>
+    </course>
+  </department>
+</courseCatalog>
+
+

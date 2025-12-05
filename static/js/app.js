@@ -66,7 +66,11 @@ async function executeQuery() {
             updateStatus(true);
         } else {
             showToast(data.error || 'Query execution failed');
-            displayError(data.error);
+            let errorMsg = data.error || 'Query execution failed';
+            if (data.help) {
+                errorMsg += '\n\n' + data.help;
+            }
+            displayError(errorMsg);
             updateStatus(false);
         }
     } catch (error) {
@@ -115,11 +119,23 @@ function displayResults(results) {
 }
 
 function displayError(error) {
+    // Format error message with line breaks
+    const formattedError = escapeHtml(error).replace(/\n/g, '<br>');
     resultsContainer.innerHTML = `
         <div class="empty-state">
             <div class="empty-icon">⚠️</div>
-            <h3>Error</h3>
-            <p style="color: var(--error);">${escapeHtml(error)}</p>
+            <h3>Connection Error</h3>
+            <div style="color: var(--error); text-align: left; max-width: 600px; margin: 0 auto;">
+                ${formattedError}
+            </div>
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border: 1px solid var(--border); border-radius: 8px; max-width: 600px; text-align: left;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">💡 Quick Fix Options:</h4>
+                <ol style="color: var(--text-secondary); line-height: 1.8;">
+                    <li>Deploy Fuseki as a separate service on Render</li>
+                    <li>Set <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">FUSEKI_ENDPOINT</code> environment variable in Render</li>
+                    <li>Use a public SPARQL endpoint (e.g., DBpedia, Wikidata)</li>
+                </ol>
+            </div>
         </div>
     `;
     resultCount.textContent = 'Error';
@@ -189,9 +205,23 @@ function loadExample(query) {
 // Connection Status
 async function checkConnection() {
     try {
+        const healthResponse = await fetch('/api/health');
+        if (healthResponse.ok) {
+            const health = await healthResponse.json();
+            if (health.status === 'connected') {
+                updateStatus(true);
+                return;
+            }
+        }
+    } catch (error) {
+        // Ignore health check errors
+    }
+    
+    // Fallback: check if examples endpoint works (means app is running)
+    try {
         const response = await fetch('/api/examples');
         if (response.ok) {
-            updateStatus(true);
+            updateStatus(false); // App works but Fuseki not connected
         } else {
             updateStatus(false);
         }

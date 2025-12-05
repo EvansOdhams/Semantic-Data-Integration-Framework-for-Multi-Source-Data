@@ -56,13 +56,34 @@ def execute_query():
     except requests.exceptions.ConnectionError:
         return jsonify({
             'success': False,
-            'error': 'Cannot connect to Fuseki. Make sure Fuseki is running on localhost:3030'
+            'error': f'Cannot connect to Fuseki at {FUSEKI_ENDPOINT}. Please ensure Fuseki is running and accessible. For deployment, set the FUSEKI_ENDPOINT environment variable to your Fuseki service URL.',
+            'help': 'To set up Fuseki: 1) Deploy Fuseki as a separate service on Render, 2) Set FUSEKI_ENDPOINT environment variable to your Fuseki URL, or 3) Use a public SPARQL endpoint.'
         }), 503
     except Exception as e:
         return jsonify({
             'success': False,
             'error': str(e)
         }), 500
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """Check if Fuseki endpoint is accessible"""
+    try:
+        # Simple query to test connection
+        response = requests.get(
+            FUSEKI_ENDPOINT.replace('/query', ''),
+            timeout=5
+        )
+        return jsonify({
+            'status': 'connected' if response.status_code < 500 else 'error',
+            'endpoint': FUSEKI_ENDPOINT
+        })
+    except:
+        return jsonify({
+            'status': 'disconnected',
+            'endpoint': FUSEKI_ENDPOINT,
+            'message': 'Fuseki endpoint is not accessible'
+        }), 503
 
 def format_sparql_results(sparql_json):
     """Format SPARQL JSON results for display"""
